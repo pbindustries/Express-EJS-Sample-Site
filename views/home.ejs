@@ -1,0 +1,208 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<html lang="en"> 
+  <head>
+    <title>Sample Website Using-Node-and-Express</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/2.2.0/topojson.min.js"></script>
+  </head> 
+
+  <body>
+  <!-- HEADER -->
+  <%- include('partials/navbar') %>
+    <!-- TITLE -->
+    <div class="container-fluid text-center bg-1">
+      <div style="background:transparent !important" class="jumbotron">
+        <h1>Site</h1>
+        <p>Info about this site</p>
+        <div class="container" id="hoverPic">
+          <img src="/images/rock.jpeg" class="img-responsive margin" alt="Image" align="middle" id="preHoverPic">
+          <div class="middle">
+            <div class="text" id="hoverText">
+              <a href="http://www.google.com/">Click here for more info about the data used </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIRST CONTAINER -->
+    <div class="container-fluid bg-7">
+
+      <!-- FORM DIV -->
+      <div class="col-sm-6 col-sm-offset-3 text-center container bg-2">
+
+        <!-- FORM -->              <!-- action = the url where we want to POST -->
+        <form name="myForm" id="myForm" action="http://localhost:5000/" method="POST">
+
+            <!-- NAME -->
+            <div id="name-group" class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="boom">
+            </div>
+
+            <!-- EMAIL -->
+            <div id="email-group" class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email" placeholder="boom@baby">
+            </div>
+
+            <button id="submit-button" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- SECOND CONTAINER  -->
+    <div class="container-fluid bg-5 text-center">    
+      <h3 class="margin">Some things i like:</h3><br>
+      <h4 class="margin">(grid container can be redesigned or excluded completely depending on the project)</h3><br>
+      <div class="row">
+        <div class="col-sm-4">
+          <p>Rick and Morty</p>
+          <img src="/images/RickMorty.png" class="img-responsive margin" style="width:40%" alt="Image">
+        </div>
+        <div class="col-sm-4"> 
+          <p>Rock Climbing</p>
+          <img src="/images/rock.jpeg" class="img-responsive margin" style="width:100%" alt="Image">
+        </div>
+        <div class="col-sm-4"> 
+          <p>Yoga.</p>
+          <img src="/images/yoga.jpeg" class="img-responsive margin" style="width:50%" alt="Image">
+        </div>
+      </div>
+    </div>
+
+    <!-- THIRD CONTAINER  -->
+    <!-- Fix map title -->
+    <!-- <div class="container-fluid text-center">
+      <H2>Pick a location:</H2>
+    </div>
+    -->
+    <!-- Call map.js -->
+    <div class="map bg-4" ></div>
+    <script type="text/javascript" src="map.js"></script>
+
+    <!-- FOURTH CONTAINER -->
+    <div class="container-fluid bg-7">
+
+      <!-- FORM DIV -->
+      <div class="col-sm-6 col-sm-offset-3 text-center container bg-2">
+
+        <!-- FORM -->              <!-- action = the url where we want to POST -->
+        <form name="addressForm" id="addressForm" action="http://localhost:5000/address" method="POST">
+
+            <!-- ADDRESS -->
+            <div id="address-group" class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="boom">
+            </div>
+
+            <button id="submit-button" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
+        </form>
+      </div>
+    </div>
+
+    <!-- FIFTH CONTAINER  -->
+    <div class="container-fluid bg-5 text-center">    
+      <h3 class="margin">Sample iframe container</h3>
+      <h4 class="margin">(iframe container can be redesigned or excluded completely depending on the project)</h3><br>
+      <iframe src="/iframes/sampleFrame.html"  marginwidth="0" marginheight="0" style="height:500px;width:500px;"></iframe>
+      <!DOCTYPE html>
+      <html>
+        <head>
+        </head>
+        <body>
+        </body>
+      </html>
+    </div>
+
+    <!-- FOOTER -->
+    <%- include('partials/footer') %>
+  </body>
+
+  <script>
+    // POST
+    $(document).ready(function() {
+
+      //callback handler for form submit
+      $('#myForm').submit(function(event) {
+
+        // stop default action
+        event.preventDefault();
+
+        // get the form data
+        var formData = $(this).serializeArray();
+        var formURL = $(this).attr("action");
+
+        // process the form
+        $.ajax({
+          type        : 'POST',
+          url         : formURL, 
+          data        : formData,
+          dataType    : 'json',
+          encode      : true,
+          crossDomain : true,   
+          success: function(data) {
+            console.log(data);
+            console.log('process sucess');
+          },
+          error: function(request, status, error) {
+            console.log('Error on request. ' + request.responseText);
+            alert('Error on request. ' + request.responseText);
+          }
+        })
+      });
+
+      //Submit  the FORM
+      $("form").submit(function(){ 
+        alert("Submitted");
+      });
+    });
+  </script>
+  <script>
+    // POST
+    $(document).ready(function() {
+
+      //callback handler for form submit
+      $('#addressForm').submit(function(event) {
+
+        // stop default action
+        event.preventDefault();
+
+        // get the form data
+        var formData = $(this).serializeArray();
+        var formURL = $(this).attr("action");
+
+        // process the form
+        $.ajax({
+          type        : 'POST',
+          url         : formURL, 
+          data        : formData,
+          crossDomain : true,   
+          success: function(data) {
+            console.log(data);
+            console.log('process sucess');
+          },
+          error: function(request, status, error) {
+            console.log('Error on request. ' + request.responseText);
+            alert('Error on request. ' + request.responseText);
+          }
+        })
+      });
+
+      //Submit  the FORM
+      $("form").submit(function(){ 
+        alert("Submitted");
+      });
+    });
+  </script>
+</html>
+
+
+

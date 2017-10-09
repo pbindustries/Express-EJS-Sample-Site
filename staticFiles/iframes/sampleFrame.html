@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="frameStyle.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head> 
+
+  <body>
+    <!-- TITLE -->
+    <div class="container-fluid text-center bg-1">
+      <div style="background:transparent !important" class="jumbotron">
+        <h1>Site</h1>
+        <p>Info about this site</p>
+      </div>
+    </div>
+
+    <!-- FIRST CONTAINER -->
+    <div class="container-fluid bg-5">
+
+      <!-- FORM DIV -->
+      <div class="col-sm-6 col-sm-offset-3 text-center container bg-2">
+
+        <!-- FORM -->              <!-- action = the url where we want to POST -->
+        <form name="myForm" id="myForm" action="http://localhost:5000/users" method="POST">
+
+            <!-- NAME -->
+            <div id="name-group" class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="boom">
+            </div>
+
+            <!-- EMAIL -->
+            <div id="email-group" class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email" placeholder="boom@baby">
+            </div>
+            <button id="submit-button" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+

@@ -1,5 +1,6 @@
 # Sample-website-using-Node-and-Express
 Basic starter site for future projects. I suggest downloading the project and removing the containers that you don't need.
+[Check out the updated version of this project](https://github.com/philipbankier/Advanced-Express-Pug-Sample-Site)
 ## Installation
 Either download this repository as a zip or clone it.
 * To clone this repoitory:
